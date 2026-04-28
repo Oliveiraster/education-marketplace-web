@@ -1,0 +1,55 @@
+<div class="login-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+    <h2>Entrar</h2>
+
+    @if (errorMessage()) {
+      <div class="error-global">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <!-- EMAIL -->
+    <div class="input-group">
+      <input type="email" formControlName="email" placeholder="Email" />
+
+      @if (f.email.touched && f.email.invalid) {
+        <div class="error">
+          @if (f.email.errors?.['required']) {
+            <span>Email é obrigatório</span>
+          }
+          @if (f.email.errors?.['email']) {
+            <span>Email inválido</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="input-group">
+      <input type="password" formControlName="password" placeholder="Senha" />
+
+      @if (f.password.touched && f.password.invalid) {
+        <div class="error">
+          @if (f.password.errors?.['required']) {
+            <span>Senha é obrigatória</span>
+          }
+          @if (f.password.errors?.['minlength']) {
+            <span>Mínimo 6 caracteres</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- BUTTON -->
+    <button type="submit" [disabled]="form.invalid || loading()">
+      @if (!loading()) {
+        Entrar
+      } @else {
+        Carregando...
+      }
+    </button>
+    <div>
+      <a href="#" aria-label="Recuperar senha">Esqueci minha senha</a>
+    </div>
+  </form>
+</div>
