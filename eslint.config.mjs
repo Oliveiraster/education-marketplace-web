@@ -3,29 +3,29 @@ import tseslint from 'typescript-eslint';
 import angular from '@angular-eslint/eslint-plugin';
 import angularTemplate from '@angular-eslint/eslint-plugin-template';
 import angularTemplateParser from '@angular-eslint/template-parser';
-import prettier from 'eslint-plugin-prettier';
+import prettierPlugin from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
 
 export default [
     {
         ignores: ['dist', 'node_modules'],
     },
 
-
     js.configs.recommended,
     ...tseslint.configs.recommended,
+    prettierConfig,
     {
         files: ['**/*.ts'],
         languageOptions: {
             parser: tseslint.parser,
             parserOptions: {
                 project: ['tsconfig.app.json', 'tsconfig.spec.json'],
-                createDefaultProgram: true,
             },
         },
         plugins: {
             '@typescript-eslint': tseslint.plugin,
             '@angular-eslint': angular,
-            prettier,
+            prettier: prettierPlugin,
         },
         rules: {
             '@typescript-eslint/no-unused-vars': [
@@ -61,11 +61,11 @@ export default [
     {
         files: ['**/*.html'],
         languageOptions: {
-            parser: angularTemplateParser
+            parser: angularTemplateParser,
         },
         plugins: {
             '@angular-eslint/template': angularTemplate,
-            prettier,
+            prettier: prettierPlugin,
         },
         rules: {
             ...angularTemplate.configs.recommended.rules,
