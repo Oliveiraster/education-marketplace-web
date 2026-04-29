@@ -8,7 +8,6 @@
       </div>
     }
 
-    <!-- EMAIL -->
     <div class="input-group">
       <input type="email" formControlName="email" placeholder="Email" />
 
@@ -24,7 +23,6 @@
       }
     </div>
 
-    <!-- PASSWORD -->
     <div class="input-group">
       <input type="password" formControlName="password" placeholder="Senha" />
 
@@ -40,7 +38,6 @@
       }
     </div>
 
-    <!-- BUTTON -->
     <button type="submit" [disabled]="form.invalid || loading()">
       @if (!loading()) {
         Entrar
@@ -48,8 +45,13 @@
         Carregando...
       }
     </button>
-    <div>
-      <a href="#" aria-label="Recuperar senha">Esqueci minha senha</a>
+    <div class="links">
+      <a routerLink="/auth/forgot-password">Esqueci minha senha</a>
+
+      <div class="register">
+        <span>Não tem uma conta? </span>
+        <a routerLink="/auth/register">Criar conta</a>
+      </div>
     </div>
   </form>
 </div>
