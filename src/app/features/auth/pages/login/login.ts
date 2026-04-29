@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { loginForm } from './login.form';
-import type { LoginDto } from '../../../../core/interfaces/login.dto';
+import type { LoginDto } from '../../dto/login.dto';
 import { RouterModule } from '@angular/router';
 
 @Component({
