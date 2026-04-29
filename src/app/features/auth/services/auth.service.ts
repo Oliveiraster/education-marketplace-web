@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import type { JwtPayload } from '../../../core/interfaces/jwt-payload.interface';
-import type { LoginDto } from '../../../core/interfaces/login.dto';
+import type { LoginDto } from '../dto/login.dto';
 import type { AuthResponse } from '../../../core/interfaces/auth-response.interface';
+import type { RegisterDto } from '../dto/register.dto';
 
 import { tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
@@ -47,6 +48,14 @@ export class AuthService {
 
   login(data: LoginDto) {
     return this.http.post<AuthResponse>(`${this.API_URL}/login`, data).pipe(
+      tap(({ access_token }) => {
+        this.setSession(access_token);
+      }),
+    );
+  }
+
+  register(data: RegisterDto) {
+    return this.http.post<AuthResponse>(`${this.API_URL}/register`, data).pipe(
       tap(({ access_token }) => {
         this.setSession(access_token);
       }),

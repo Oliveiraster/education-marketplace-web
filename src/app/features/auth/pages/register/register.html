@@ -1,0 +1,42 @@
+<div class="auth-container">
+  <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2>Criar conta</h2>
+
+    @if (errorMessage()) {
+      <div class="error-global">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <div class="input-group">
+      <input type="text" placeholder="Nome" formControlName="name" />
+    </div>
+
+    <div class="input-group">
+      <input type="email" placeholder="Email" formControlName="email" />
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Senha" formControlName="password" />
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Confirmar senha" formControlName="confirmPassword" />
+    </div>
+
+    <button type="submit" [disabled]="form.invalid || loading()">
+      @if (!loading()) {
+        Criar conta
+      } @else {
+        Criando...
+      }
+    </button>
+
+    <div class="links">
+      <span class="register">
+        Já tem conta?
+        <a routerLink="/auth/login">Entrar</a>
+      </span>
+    </div>
+  </form>
+</div>
