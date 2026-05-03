@@ -1,0 +1,9 @@
+.content {
+  min-height: 100vh;
+}
+
+@media (min-width: 600px) {
+  .content {
+    padding-top: 2rem;
+  }
+}
