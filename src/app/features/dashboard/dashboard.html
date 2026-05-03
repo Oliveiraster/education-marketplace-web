@@ -1,0 +1,42 @@
+<div class="app">
+  <app-sidebar />
+
+  <main class="main">
+    <header class="header">
+      <input type="text" placeholder="Buscar cursos..." />
+    </header>
+
+    <section class="continue">
+      <h2>Continue assistindo</h2>
+
+      <div class="continue-card">
+        <div class="thumb"></div>
+
+        <div class="info">
+          <h3>React do Zero ao Avançado</h3>
+          <p>Seção 5 • Hooks</p>
+
+          <div class="progress-bar">
+            <div class="progress"></div>
+          </div>
+
+          <button>▶ Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="courses">
+      <h2>Recomendados</h2>
+
+      <div class="course-grid">
+        @for (course of courses; track $index) {
+          <div class="course-card">
+            <div class="img"></div>
+            <h4>{{ course.title }}</h4>
+            <p>⭐ {{ course.rating }} • {{ course.duration }}</p>
+          </div>
+        }
+      </div>
+    </section>
+  </main>
+</div>
