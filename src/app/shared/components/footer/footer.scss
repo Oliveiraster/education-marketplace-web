@@ -1,0 +1,52 @@
+footer {
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 1rem;
+  margin-bottom: 5rem;
+  .box-footer {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .brand h1 {
+    font-size: 1rem;
+    color: #0f172a;
+  }
+
+  .brand p {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    a {
+      text-decoration: none;
+      color: #2563eb;
+      font-size: 0.9rem;
+      transition: 0.2s;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .copy {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+}
