@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { registerForm } from './register.form';
 import { AuthService } from '../../services/auth.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import type { RegisterDto } from '../../dto/register.dto';
 
@@ -13,6 +13,7 @@ import type { RegisterDto } from '../../dto/register.dto';
   styleUrl: './register.scss',
 })
 export class Register {
+  private router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
 
@@ -40,6 +41,7 @@ export class Register {
       next: () => {
         this.loading.set(false);
         console.log('Usuário criado');
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.loading.set(false);

@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { loginForm } from './login.form';
 import type { LoginDto } from '../../dto/login.dto';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
+  private router = inject(Router);
   private readonly authService = inject(AuthService);
   private fb = inject(FormBuilder);
 
@@ -38,6 +39,7 @@ export class Login {
       next: () => {
         this.loading.set(false);
         console.log('Loginsucesso');
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.loading.set(false);
