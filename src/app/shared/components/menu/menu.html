@@ -5,16 +5,21 @@
     </div>
 
     <div class="menu-links">
-      <a routerLink="/dashboard" class="menu-item">
+      <a
+        class="menu-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLink="/dashboard"
+      >
         <span class="material-symbols-outlined">analytics</span>
         <span class="label"> Dashboard</span>
       </a>
 
-      <a class="menu-item">
+      <a routerLinkActive="active" class="menu-item">
         <span class="material-symbols-outlined">home_repair_service</span>
         <span class="label"> Serviços</span>
       </a>
-      <a routerLink="/profile" class="menu-item">
+      <a routerLinkActive="active" routerLink="/profile" class="menu-item">
         <span class="material-symbols-outlined">person</span>
         <span class="label"> Perfil</span>
       </a>

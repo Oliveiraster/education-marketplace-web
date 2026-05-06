@@ -29,16 +29,25 @@
 .menu-links {
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .menu-item {
   display: flex;
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
   color: #e2e8f0;
   font-size: 0.75rem;
+
+  &:hover {
+    background: #1e293b;
+  }
+  &.active {
+    background-color: #2563eb;
+  }
 }
 
 @media (max-width: 599px) {
