@@ -1,0 +1,28 @@
+<aside class="sidebar">
+  <h3>Perfil</h3>
+  <div class="photo"></div>
+
+  <nav class="menu-links">
+    <a
+      class="menu-item"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLink="/profile"
+    >
+      <span class="material-symbols-outlined"> inbox_text_person </span>
+      <span class="label">Sobre</span>
+    </a>
+    <a class="menu-item" routerLinkActive="active" routerLink="/profile/photo">
+      <span class="material-symbols-outlined"> photo_camera </span>
+      <span class="label">Foto</span>
+    </a>
+    <a class="menu-item" routerLinkActive="active" routerLink="/profile/personal">
+      <span class="material-symbols-outlined"> home_repair_service </span>
+      <span class="label">Dados Pessoais</span>
+    </a>
+    <a class="menu-item" routerLinkActive="active" routerLink="/profile/settings">
+      <span class="material-symbols-outlined"> settings </span>
+      <span class="label">Configuração</span>
+    </a>
+  </nav>
+</aside>
