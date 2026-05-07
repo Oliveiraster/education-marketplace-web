@@ -1,0 +1,49 @@
+<div class="page-container">
+  <h2>Sobre</h2>
+  <div class="form-card">
+    <h2>Sobre você</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="role">Área</label>
+        <input id="role" type="text" placeholder="Área (ex: Dev Backend)" formControlName="role" />
+
+        @if (role?.invalid && (role?.touched || role?.dirty)) {
+          <div class="error">Campo obrigatório</div>
+        }
+      </div>
+      <div class="input-group">
+        <label for="objective">Objetivo</label>
+        <input id="objective" type="text" placeholder="Objetivo" formControlName="objective" />
+      </div>
+
+      <div class="input-group">
+        <label for="skill">Skill</label>
+        <input
+          id="skill"
+          type="text"
+          placeholder="Skills (ex: Java, Angular)"
+          formControlName="skills"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="bio">Bio</label>
+        <textarea id="bio" placeholder="Fale sobre você..." formControlName="bio"></textarea>
+
+        @if (bio?.errors && (bio?.touched || bio?.dirty)) {
+          <div class="error">
+            @if (bio?.errors?.['required']) {
+              <span>Bio é obrigatória</span>
+            }
+            @if (bio?.errors?.['minlength']) {
+              <span>Mínimo de 10 caracteres</span>
+            }
+          </div>
+        }
+      </div>
+
+      <button type="submit" [disabled]="form.invalid">Salvar</button>
+    </form>
+  </div>
+</div>
