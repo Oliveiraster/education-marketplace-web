@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { loginForm } from './login.form';
 import type { LoginDto } from '../../dto/login.dto';
 import { Router, RouterModule } from '@angular/router';
+import { NotificationService } from '../../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class Login {
   private router = inject(Router);
   private readonly authService = inject(AuthService);
   private fb = inject(FormBuilder);
+  private readonly notification = inject(NotificationService);
 
   form = loginForm(this.fb);
   loading = signal(false);
@@ -38,15 +40,17 @@ export class Login {
     this.authService.login(data).subscribe({
       next: () => {
         this.loading.set(false);
-        console.log('Loginsucesso');
-        this.router.navigate(['/dashboard']);
+        this.notification.success('Login successful');
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1000);
       },
       error: (err) => {
         this.loading.set(false);
         if (err.status === 401) {
           this.errorMessage.set(err.error.message);
         } else {
-          this.errorMessage.set('Error not await. try see you later.');
+          this.errorMessage.set('Confirm your credentials and try again');
         }
       },
     });

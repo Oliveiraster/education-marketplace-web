@@ -40,3 +40,19 @@ body {
 * {
   box-sizing: border-box;
 }
+
+/* =========================================================
+   SNACKBAR
+========================================================= */
+
+.mat-mdc-snack-bar-container.success-snackbar .mdc-snackbar__surface {
+  background-color: #052e16;
+  color: #dcfce7;
+  --mat-snack-bar-button-color: #86efac;
+}
+
+.mat-mdc-snack-bar-container.error-snackbar .mdc-snackbar__surface {
+  background-color: #450a0a;
+  color: #fee2e2;
+  --mat-snack-bar-button-color: #fca5a5;
+}
