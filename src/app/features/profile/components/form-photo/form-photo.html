@@ -1,7 +1,7 @@
 <div class="page-container">
   <h2>Foto de perfil</h2>
   <div class="photo-wrapper">
-    <img [src]="previewUrl || 'assets/default-avatar.jpg'" alt="Avatar" class="avatar" />
+    <img [src]="imageSrc()" alt="Avatar" class="avatar" />
 
     <input
       type="file"
@@ -14,14 +14,11 @@
     <div class="actions">
       <button type="button" (click)="fileInput.click()">Escolher foto</button>
 
-      @if (previewUrl !== null) {
+      @if (filePreview()) {
         <button type="button" (click)="removePhoto()">Remover</button>
       }
     </div>
   </div>
-  @if (!previewUrl) {
-    <span class="no-photo">Sem foto</span>
-  }
 
-  <button type="button" (click)="upload()" [disabled]="!selectedFile">Salvar</button>
+  <button type="button" (click)="upload()" [disabled]="!selectedFile()">Salvar</button>
 </div>

@@ -1,5 +1,5 @@
 import type { Routes } from '@angular/router';
-import { Profile } from './profile';
+import { Profile } from './pages/profile';
 import { FormPhoto } from './components/form-photo/form-photo';
 import { FormAbout } from './components/form-about/form-about';
 import { FormPersonal } from './components/form-personal/form-personal';
