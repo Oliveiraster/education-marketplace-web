@@ -1,8 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { ProfileStoreService } from '../../services/profile-store.service';
+import type { AboutDto } from '../../dto/about.dto';
+import { ProfileApiService } from '../../services/profile-api.service';
+import { NotificationService } from '../../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-about',
@@ -11,13 +15,32 @@ import { RouterModule } from '@angular/router';
   styleUrl: './form-about.scss',
 })
 export class FormAbout {
-  private fb = inject(FormBuilder);
+  private readonly fb = inject(FormBuilder);
+  private readonly profileStore = inject(ProfileStoreService);
+  private readonly profileApi = inject(ProfileApiService);
+  private readonly notification = inject(NotificationService);
+
+  readonly profile$ = this.profileStore.profile;
+
+  isLoading = false;
 
   form = this.fb.group({
-    role: ['', Validators.required],
+    role: ['', [Validators.required]],
     objective: [''],
     skills: [''],
     bio: ['', [Validators.required, Validators.minLength(10)]],
+  });
+
+  private readonly syncProfileEffect = effect(() => {
+    const profile = this.profile$();
+    if (!profile?.about) return;
+
+    this.form.patchValue({
+      role: profile.about.role ?? '',
+      objective: profile.about.objective ?? '',
+      skills: profile.about.skills?.join(', ') ?? '',
+      bio: profile.about.bio ?? '',
+    });
   });
 
   get role() {
@@ -34,13 +57,28 @@ export class FormAbout {
       return;
     }
 
-    const value = this.form.value;
+    const raw = this.form.getRawValue();
 
-    const payload = {
-      ...value,
-      skills: value.skills ? value.skills.split(',').map((s: string) => s.trim()) : [],
+    const about: AboutDto = {
+      role: raw.role ?? undefined,
+      objective: raw.objective ?? undefined,
+      bio: raw.bio ?? undefined,
+      skills:
+        raw.skills
+          ?.split(',')
+          .map((s) => s.trim())
+          .filter(Boolean) ?? [],
     };
 
-    console.log(payload);
+    this.profileApi.updateMyAbout(about).subscribe({
+      next: () => {
+        this.profileStore.loadProfile();
+
+        this.notification.success('Perfil atualizado com sucesso!');
+      },
+      error: (err) => {
+        this.notification.apiError(err, 'Erro ao atualizar perfil. Tente novamente.');
+      },
+    });
   }
 }

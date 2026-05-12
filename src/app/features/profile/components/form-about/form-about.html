@@ -43,7 +43,13 @@
         }
       </div>
 
-      <button type="submit" [disabled]="form.invalid">Salvar</button>
+      <button type="submit" [disabled]="form.invalid || isLoading">
+        @if (isLoading) {
+          <span>Salvando...</span>
+        } @else {
+          <span>Salvar</span>
+        }
+      </button>
     </form>
   </div>
 </div>
